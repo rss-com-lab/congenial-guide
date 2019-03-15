@@ -9,30 +9,64 @@ export default class SheetJSApp extends Component {
     cols: [] /* Array of column objects e.g. { name: "C", K: 2 } */
   };
 
+  validationByMagicNumbers = (file) => {
+    /* Boilerplate to set up FileReader */
+    return new Promise((resolve) =>{
+      const reader = new FileReader();
+      reader.onload = e => {
+        /* Parse data */
+        const bstr = e.target.result;
+        const int32View = new Uint8Array(bstr);
+        resolve(int32View);
+    
+      };
+      reader.readAsArrayBuffer(file);
+    })
+  }
+
   handleFile = (file /*:File*/) => {
     /* Boilerplate to set up FileReader */
-    const reader = new FileReader();
-    const rABS = !!reader.readAsBinaryString;
-    reader.onload = e => {
-      /* Parse data */
-      const bstr = e.target.result;
-      const wb = XLSX.read(bstr, { type: rABS ? "binary" : "array" });
-      // console.log(wb);
-      /* Get first worksheet */
-      const wsname = wb.SheetNames[0];
-      // console.log(wsname);
-      const ws = wb.Sheets[wsname];
-      // console.log(ws);
-      /* Convert array of arrays */
-      const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
-      /* Update state */
-      this.props.stateUpdateFunc(wb);
-      this.setState({ data: data, cols: make_cols(ws["!ref"]) });
-      // console.log(this.state.data);
-      
-    };
-    if (rABS) reader.readAsBinaryString(file);
-    else reader.readAsArrayBuffer(file);
+    const result = this.validationByMagicNumbers(file);
+    console.log(result);
+    result.then(int32View => {
+      if (
+        int32View.length > 4 &&
+        int32View[0] === 0x50 &&
+        int32View[1] === 0x4b &&
+        int32View[2] === 0x3 &&
+        int32View[3] === 0x4
+      ) {
+        const reader = new FileReader();
+
+        const rABS = !!reader.readAsBinaryString;
+
+        reader.onload = e => {
+          /* Parse data */
+
+          const bstr = e.target.result;
+    
+          const wb = XLSX.read(bstr, { type: rABS ? "binary" : "array" });
+
+          // console.log(wb);
+          /* Get first worksheet */
+          const wsname = wb.SheetNames[0];
+          // console.log(wsname);
+          const ws = wb.Sheets[wsname];
+          // console.log(ws);
+          /* Convert array of arrays */
+          const data = XLSX.utils.sheet_to_json(ws, { header: 1 });
+          /* Update state */
+          this.props.stateUpdateFunc(wb);
+          this.setState({ data: data, cols: make_cols(ws["!ref"]) });
+          // console.log(this.state.data);
+
+        };
+        if (rABS) reader.readAsBinaryString(file);
+        else reader.readAsArrayBuffer(file);
+      } else {
+        console.log("type of file is not xlsx");
+      }
+    });
   }
   exportFile = () => {
     /* convert state to workbook */
@@ -88,20 +122,34 @@ class DragDropFile extends Component {
   suppress = (evt) => {
     evt.stopPropagation();
     evt.preventDefault();
+    
+    // const files = evt.target;
+    // console.log(files);
+    
+    
   }
   onDrop = (evt) => {
     evt.stopPropagation();
     evt.preventDefault();
+    console.log('drop');
     const files = evt.dataTransfer.files;
-    if (files && files[0]) this.props.handleFile(files[0]);
+    console.log(files);
+    const twoMB = 2e6;
+    if (files && files[0] && files[0].size >= twoMB){
+      console.log("big size of file");
+      return;
+    } else if (files && files[0] &&!files[0].type && files[0].size % 4096 === 0) {
+      console.log('droped file is folder');
+      return;
+    } else this.props.handleFile(files[0]);
+    
   }
   render() {
     return (
-      <div
+      <div className='drop-zone'
         onDrop={this.onDrop}
         onDragEnter={this.suppress}
-        onDragOver={this.suppress}
-      >
+        onDragOver={this.suppress}>
         {this.props.children}
       </div>
     );
@@ -117,6 +165,7 @@ class DataInput extends Component {
   
   handleChange = (e) => {
     const files = e.target.files;
+    
     if (files && files[0]) this.props.handleFile(files[0]);
   }
   render() {
