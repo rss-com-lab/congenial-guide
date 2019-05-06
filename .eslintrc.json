@@ -1,0 +1,42 @@
+{
+    "extends": ["airbnb-base", "standard-jsx", "react-app"],
+    "env" : {
+        "browser": true,
+        "node": true,
+        "es6" : true
+    },
+    "settings": {
+        "react": {
+            "version": "16.0"
+        }
+    },
+    "plugins": [
+        "react"
+    ],
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "rules": {
+        "no-param-reassign": "off",
+        "no-return-assign": "off",
+        "class-methods-use-this": "off",
+        "import/extensions": "browser",
+        "indent": ["error", 4],
+        "no-console": "warn",
+        "react/jsx-no-bind": ["error", {
+            "allowArrowFunctions": true,
+            "allowBind": false,
+            "ignoreRefs": true
+        }],
+        "react/jsx-indent-props": [2, 4],
+        "react/jsx-indent": [2, 4],
+        "react/no-did-update-set-state": "error",
+        "react/no-unknown-property": "error",
+        "react/prop-types": "error",
+        "react/react-in-jsx-scope": "error"
+    }
+}

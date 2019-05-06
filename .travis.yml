@@ -1,0 +1,23 @@
+language: node_js
+node_js: stable
+install: npm install
+script: npm run test
+
+jobs:
+  include:
+    - stage: test
+      node_js: stable
+      script: npm run test
+    - stage: semantic release
+      if: branch = master AND type = push
+      node_js: stable
+      script: npm run semantic-release
+      before_deploy: npm run build
+      deploy:
+        provider: pages
+        skip_cleanup: true
+        github_token: $GITHUB_TOKEN  # Set in the settings page of your repository, as a secure variable
+        local_dir: 'build'
+        keep_history: true
+        on:
+            branch: master

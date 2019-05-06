@@ -1,0 +1,43 @@
+{
+    "author": "RSS com lab",
+    "name": "medUni-sick-days-analisys",
+    "version": "0.0.0-development",
+    "description": "Simple UI for Med Uni",
+    "license": "MIT",
+    "repository": "rss-com-lab/medUni-sick-days-analisys",
+    "bugs": "https://github.com/rss-com-lab/medUni-sick-days-analisys/issue",
+    "private": false,
+    "scripts": {
+		"build": "echo \"BUILD: no build\" && exit 0",
+		"lint": "eslint .",
+        "test": "npm run lint && npm run build",
+        "semantic-release": "semantic-release"
+    },
+    "files": [
+        "build/",
+        "README.md"
+    ],
+    "husky": {
+        "hooks": {
+            "pre-commit": "npm run test"
+        }
+    },
+    "dependencies": {},
+    "devDependencies": {
+		"husky": "^1.2.1",
+        "semantic-release": "^15.13.3",
+		"@semantic-release/git": "^7.0.8",
+        "@semantic-release/exec": "^3.3.2",
+		"@semantic-release/changelog": "^3.0.2",
+		"eslint": "^5.16.0",
+		"babel-eslint": "^10.0.1",
+        "eslint-plugin-react": "^7.13.0",
+		"eslint-plugin-import": "^2.17.2",
+		"eslint-plugin-flowtype": "^3.7.0",
+        "eslint-plugin-jsx-a11y": "^6.2.1",
+		"eslint-config-react-app": "^4.0.0",
+		"eslint-plugin-react-hooks": "^1.6.0",
+		"eslint-config-airbnb-base": "^13.1.0",
+		"eslint-config-standard-react": "^7.0.2"
+    }
+}
