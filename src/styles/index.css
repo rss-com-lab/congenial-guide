@@ -1,0 +1,259 @@
+
+:root {
+    /* Colors */
+    --color-white-light: hsl(0, 0%, 100%);
+    --color-white-normal: hsl(0, 0%, 97%);
+    --color-white-normal-alpha: rgba(247, 247, 247, 0.3);
+    --color-white-dark: hsl(0, 0%, 87%);
+
+    --color-blue-light: hsl(204, 64%, 54%);
+    --color-blue-normal: hsl(204, 64%, 44%);
+    --color-blue-dark: hsl(204, 64%, 34%);
+
+    --color-orange-light: hsl(30, 100%, 60%);;
+    --color-orange-normal: hsl(30, 100%, 50%);;
+    --color-orange-normal-alpha: rgba(255, 127, 0, 0.3);;
+    --color-orange-dark: hsl(30, 100%, 40%);;
+
+    --color-red-light: hsl(6, 78%, 67%);;
+    --color-red-normal: hsl(6, 77%, 57%);
+    --color-red-normal-alpha: rgba(230, 76, 59, 0.3);
+    --color-red-dark: hsl(6, 78%, 47%);;
+
+    --color-green-light: hsl(117, 15%, 56%);
+    --color-green-normal: hsl(117, 16%, 46%);
+    --color-green-normal-alpha: rgba(100, 136, 98, 0.3);
+    --color-green-dark: hsl(117, 16%, 36%);
+
+    --color-gray-light: hsl(184, 9%, 72%);
+    --color-gray-normal: hsl(184, 9%, 62%);
+    --color-gray-dark: hsl(184, 6%, 52%);
+
+    --color-black-light: hsl(211, 19%, 39%);
+    --color-black-normal: hsl(211, 29%, 29%);
+    --color-black-dark: hsl(211, 29%, 19%);
+
+    /* Defaults */
+    --default-font: 'Tahoma', Arial, sans-serif;
+    --default-bg-color: var(--color-white-normal);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--default-font);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+/* Default */
+html,
+body {
+    height: 100%;
+
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+    line-height: 1.5;
+    font-family: var(--default-font);
+    background-color: var(--default-bg-color);
+    background-image: url('../assets/img/bg.jpg');
+    background-position: top center;
+}
+
+blockquote,
+ul,
+figure {
+    margin-block-end: 0;
+    margin-block-start: 0;
+    margin-inline-end: 0;
+    margin-inline-start: 0;
+    padding-inline-start: 0;
+}
+table {
+    border-spacing: 0;
+}
+a {
+    text-decoration: none;
+}
+p {
+    margin-block-end: 0;
+    margin-block-start: 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+    padding: 0;
+    margin-block-end: 0;
+    margin-block-start: 0;
+}
+/* End Default */
+
+/* App */
+/* Main */
+.root {
+    width: 100%;
+    height: 100%;
+}
+
+.wrapper {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+/* End Main */
+
+/* Header */
+.header {
+    background: var( --color-green-normal);
+    padding: 10px;
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    max-height: 30px;
+    height: 30px;
+}
+.header-title  {
+    width: 100%;
+    align-items: flex-start;
+}
+.header-title h1 {
+    color: var(--color-white-normal);
+    font-size: 1.2em;
+}
+.header .header-nav ul{
+    list-style-type: none;
+}
+.header .header-nav ul a {
+    font-size: 0.83em;
+    text-transform: uppercase;
+    color: var(--color-white-normal);
+}
+.header-user__more {
+    font-size: 10px;
+    display: block;
+    text-align: center;
+    padding: 0 15px;
+    font-size: 1em;
+}
+
+.header .header-settings{
+    position: absolute;
+    z-index: 2;
+    transition: all 120ms linear;
+    right: 0;
+    top: 100%;
+    border-radius: 0 0 2px 2px;
+    padding: 10px;
+    overflow: hidden;
+    background: var(--color-green-normal);
+}
+.header .header-settings.header-settings__visible {
+    visibility: visible;
+    height: 100%;
+}
+.header .header-settings.header-settings__hidden {
+    visibility: hidden;
+    height: 0;
+}
+.header .header-settings .header-nav {
+    position: relative;
+}
+/* End Header */
+/* Content */
+.content {
+    flex: 1 0 auto;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.content .middle {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.content .header {
+    flex: 1 0 auto;
+}
+.content .app-content {
+    flex: 2 0 auto;
+}
+.app-content {
+    margin: 20px;
+    display: flex;
+}
+.content-50 {
+    flex: 1 0 auto;
+    margin: 20px auto;
+    width: 50%;
+}
+.content-404 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* End content */
+
+/* Footer */
+footer {
+    text-align: center;
+    margin: 10px 0;
+    flex: 0 0 auto;
+    font-size: 0.5em;
+}
+/* End footer */
+
+/* Buttons */
+.button-empty {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+.button-success {
+    background: var(--color-blue-normal);
+    border: none;
+    border-radius: 5px;
+    max-height: 35px;
+    padding: 10px 25px;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: var(--color-white-normal);
+    font-weight: bold;
+    transition: all 0.3s ease-out;
+}
+.button-success:hover {
+    background: var(--color-blue-dark);
+}
+.button-success_reverse {
+    background: none;
+    border: 1px solid var(--color-blue-normal);
+    color: var(--color-blue-normal);
+}
+.button-success_reverse:hover {
+    background: var(--color-blue-normal);
+    color: var(--color-white-normal);
+}
+.button-alert {
+    background: var(--color-red-normal);
+    border: none;
+    border-radius: 10px;
+    min-width: 40px;
+    padding: 5px 5px;
+    cursor: pointer;
+    color: var(--color-white-normal);
+}
+/* */
+/* End App */

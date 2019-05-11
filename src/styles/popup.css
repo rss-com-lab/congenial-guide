@@ -1,0 +1,16 @@
+/* PopUp */
+.popup {
+    position: absolute;
+    top:0;
+    left: 0;
+    background: var(--color-black-normal);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.popup.close {
+    visibility: hidden;
+}
+/* End popUp */

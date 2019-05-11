@@ -1,0 +1,2 @@
+export const EMPLOYERS_SET = 'EMPLOYERS_SET';
+export const EMPLOYERS_REMOVE = 'EMPLOYERS_REMOVE';

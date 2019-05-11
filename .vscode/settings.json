@@ -9,5 +9,6 @@
         "plaintext",
         "json",
         "javascript"
-    ],
+	],
+	"spellright.ignoreFiles": [ "**/package-lock.json", "package.json" ]
 }
